@@ -11,9 +11,6 @@ Created on Thu Nov 24 18:28:39 2022
 # Choisi l'énergie 
 # Données du NIST: https://www.nist.gov/pml/x-ray-mass-attenuation-coefficients
 
-import matplotlib.pyplot as plt
-import pandas as pd
-import numpy as np
 import fonction as f
 
 
@@ -39,7 +36,6 @@ Eau.print()
 
 # Extraction du coefficient d'atténuation pour l'eau 
 Eau.get_mu(0.14)
-
 
 # Extraction du coefficient d'absorption pour l'eau 
 Eau.get_muen(0.14)
