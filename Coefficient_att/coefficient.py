@@ -8,34 +8,41 @@ Created on Thu Nov 24 18:28:39 2022
 
 # Script pour l'extraction des valeurs des coefficients d'atténuation et d'absorption pour différents matériaux
 # avec des classe objet 
-# Choisi l'énergie 
+# Choisir l'énergie (en keV)
 # Données du NIST: https://www.nist.gov/pml/x-ray-mass-attenuation-coefficients
 
 import fonction as f
+import time
 
+start_time = time.time()
 
 # Création des classe pour les différents matériaux 
 
-Eau = f.Data("Données/eau", "Eau")
-Air = f.Data("Données/air", "Air")
-Tissus_mou = f.Data("Données/soft_tissue", "Tissus mou")
-Os = f.Data("Données/bone", "Os")
-Poumon = f.Data("Données/lung", "Poumon")
-PMMA = f.Data("Données/pmma", "PMMA")
+Eau = f.Coefficient("Données/eau", "Eau")
+Air = f.Coefficient("Données/air", "Air")
+Tissus_mou = f.Coefficient("Données/soft_tissue", "Tissus mou")
+Os = f.Coefficient("Données/bone", "Os")
+Poumon = f.Coefficient("Données/lung", "Poumon")
+PMMA = f.Coefficient("Données/pmma", "PMMA")
 
-Aluminium = f.Data("Données/aluminium", "Aluminium")
-Argon = f.Data("Données/argon", "Argon")
-Cuivre = f.Data("Données/cu", "Cuivre")
-Fer = f.Data("Données/fer", "Fer")
-Plomb = f.Data("Données/plomb", "Plomb")
-Zinc = f.Data("Données/zinc", "Zinc")
+Aluminium = f.Coefficient("Données/aluminium", "Aluminium")
+Argon = f.Coefficient("Données/argon", "Argon")
+Cuivre = f.Coefficient("Données/cu", "Cuivre")
+Fer = f.Coefficient("Données/fer", "Fer")
+Plomb = f.Coefficient("Données/plomb", "Plomb")
+Zinc = f.Coefficient("Données/zinc", "Zinc")
 
 
 # Plot des coefficients 
-Eau.print()
+Eau.plot()
 
 # Extraction du coefficient d'atténuation pour l'eau 
-Eau.get_mu(0.14)
+print(Eau.get_mu_rho(140))
+Eau.print_mu_rho(140)
+Eau.plot_attenuation(140, 50)
 
-# Extraction du coefficient d'absorption pour l'eau 
-Eau.get_muen(0.14)
+# Calcul de l'atténuation (%)
+print("Atténuation :", 100*Eau.attenuation(140, 10), "%")
+
+duree = time.time() - start_time
+print ('\n \nTotal running time : %5.3g s' % duree)
