@@ -128,32 +128,36 @@ class Coefficient:
         plt.show()
     
     # Fonction pour tracer l'atténuation des photons dans la matière
-    def plot_attenuation(self, energie, distance=200):
+    def plot_attenuation(self, energie, distance=1000):
         atte = self.df_data.loc[int((energie-min(self.energy))/self.pas)]['mu (cm^-1)']
         attenuation = []
-        Nb = 1000
+        Nb = 100000
         d = np.linspace(0, distance, Nb)
         
         p_50 = 0
-        p_80 = 0
+        p_20 = 0
+        p_10 = 0
         for i in range(0, len(d)):
             attenuation.append(np.exp(-atte*d[i]))
             if attenuation[i] >= 0.5:
                 p_50 = (i*distance)/Nb
             if attenuation[i] >= 0.2:
-                p_80 = (i*distance)/Nb
+                p_20 = (i*distance)/Nb
+            if attenuation[i] >= 0.1:
+                p_10 = (i*distance)/Nb
+            if attenuation[i] >= 0.001:
+                x = (i*distance)/Nb
             
         plt.figure(figsize=(10, 10)) 
         plt.plot(d, attenuation, label=self.name)
         plt.title("Atténuation des photons de %.0f keV dans %s"%(energie, self.name), fontsize=15)
-        plt.xlabel("Distance (mm)", fontsize=15)
+        plt.xlabel("Distance (cm)", fontsize=15)
         plt.ylabel("Atténuation (%)", fontsize=15)
-        plt.axvline(x=p_50, color='orange', linestyle='--', linewidth=1, label="50%% : %0.1f mm"%(p_50))
-        plt.axvline(x=p_80, color='red', linestyle='--', linewidth=1, label="20%% : %0.1f mm"%(p_80))
+        plt.axvline(x=p_50, color='yellow', linestyle='--', linewidth=1, label="50%% : %0.2f cm"%(p_50))
+        plt.axvline(x=p_20, color='orange', linestyle='--', linewidth=1, label="20%% : %0.2f cm"%(p_20))
+        plt.axvline(x=p_10, color='red', linestyle='--', linewidth=1, label="10%% : %0.2f cm"%(p_10))
         plt.grid()
-        #plt.ylim(0, 1.2)
-        #plt.yscale('log')
-        #plt.xscale('log')
+        plt.xlim(0, x)
         plt.legend(loc=1, fontsize=15)
         plt.show()
         

@@ -18,19 +18,19 @@ start_time = time.time()
 
 # Création des classe pour les différents matériaux 
 
-Eau = f.Coefficient("Données/eau", "Eau")
-Air = f.Coefficient("Données/air", "Air")
-Tissus_mou = f.Coefficient("Données/soft_tissue", "Tissus mou")
-Os = f.Coefficient("Données/bone", "Os")
-Poumon = f.Coefficient("Données/lung", "Poumon")
-PMMA = f.Coefficient("Données/pmma", "PMMA")
+Eau = f.Coefficient("Données/eau", "Eau", 1)
+Air = f.Coefficient("Données/air", "Air", 1.2e-3)
+Tissus_mou = f.Coefficient("Données/soft_tissue", "Tissus mou", 1.03)
+Os = f.Coefficient("Données/bone", "Os", 1.92)
+Poumon = f.Coefficient("Données/lung", "Poumon", 0.26)
+PMMA = f.Coefficient("Données/pmma", "PMMA", 1.18)
 
-Aluminium = f.Coefficient("Données/aluminium", "Aluminium")
-Argon = f.Coefficient("Données/argon", "Argon")
-Cuivre = f.Coefficient("Données/cu", "Cuivre")
-Fer = f.Coefficient("Données/fer", "Fer")
-Plomb = f.Coefficient("Données/plomb", "Plomb")
-Zinc = f.Coefficient("Données/zinc", "Zinc")
+Aluminium = f.Coefficient("Données/aluminium", "Aluminium", 2.698)
+Argon = f.Coefficient("Données/argon", "Argon", 0.001784)
+Cuivre = f.Coefficient("Données/cu", "Cuivre", 8.96)
+Fer = f.Coefficient("Données/fer", "Fer", 7.874)
+Plomb = f.Coefficient("Données/plomb", "Plomb", 11.35)
+Zinc = f.Coefficient("Données/zinc", "Zinc", 7.14)
 
 
 # Plot des coefficients 
@@ -39,7 +39,10 @@ Eau.plot()
 # Extraction du coefficient d'atténuation pour l'eau 
 print(Eau.get_mu_rho(140))
 Eau.print_mu_rho(140)
-Eau.plot_attenuation(140, 50)
+
+Eau.plot_attenuation(1000)
+Plomb.plot_attenuation(1000)
+Plomb.plot_attenuation(100)
 
 # Calcul de l'atténuation (%)
 print("Atténuation :", 100*Eau.attenuation(140, 10), "%")
