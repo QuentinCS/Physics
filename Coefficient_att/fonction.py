@@ -54,12 +54,12 @@ class Coefficient:
         return self.df_data.loc[int((en-min(self.energy))/self.pas)]['mu_rho_en (cm2/g)']
     def get_mu(self, en):
         if self.rho != None:
-            return self.df_data.loc[int((en-min(self.energy))/self.pas)]['mu']
+            return self.df_data.loc[int((en-min(self.energy))/self.pas)]['mu (cm^-1)']
         else:
             print("Erreur: mu non disponible, masse volumique pour '%s' non renseignée"%(self.name))
     def get_mu_en(self, en):
         if self.rho !=0:
-            return self.df_data.loc[int((en-min(self.energy))/self.pas)]['mu_en']
+            return self.df_data.loc[int((en-min(self.energy))/self.pas)]['mu_en (cm^-1)']
         else:
             print("Erreur: mu non disponible, masse volumique pour '%s' non renseignée"%(self.name)) 
     def print_mu_rho(self, en):
@@ -149,7 +149,7 @@ class Coefficient:
                 x = (i*distance)/Nb
             
         plt.figure(figsize=(10, 10)) 
-        plt.plot(d, attenuation, label=self.name)
+        plt.plot(d, attenuation, label=self.name, color='Navy')
         plt.title("Atténuation des photons de %.0f keV dans %s"%(energie, self.name), fontsize=15)
         plt.xlabel("Distance (cm)", fontsize=15)
         plt.ylabel("Atténuation (%)", fontsize=15)

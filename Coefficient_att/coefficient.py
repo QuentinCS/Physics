@@ -35,17 +35,19 @@ Zinc = f.Coefficient("Données/zinc", "Zinc", 7.14)
 
 # Plot des coefficients 
 Eau.plot()
+Plomb.plot()
 
 # Extraction du coefficient d'atténuation pour l'eau 
 print(Eau.get_mu_rho(140))
 Eau.print_mu_rho(140)
 
-Eau.plot_attenuation(1000)
-Plomb.plot_attenuation(1000)
-Plomb.plot_attenuation(100)
+# Plot de l'atténuation dans la matière
+#Eau.plot_attenuation(1000)
+#Plomb.plot_attenuation(1000)
+#Plomb.plot_attenuation(100)
 
-# Calcul de l'atténuation (%)
-print("Atténuation :", 100*Eau.attenuation(140, 10), "%")
+
+Tissus_mou.plot_attenuation(100)
 
 duree = time.time() - start_time
 print ('\n \nTotal running time : %5.3g s' % duree)
